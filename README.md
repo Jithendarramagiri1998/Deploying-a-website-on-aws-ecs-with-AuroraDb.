@@ -1,20 +1,32 @@
-Project Title:— Deploying a Website on AWS ECS with Aurora using Terraform
-🧭 Overview
+# 🚀 Deploying a Website on AWS ECS with Aurora using Terraform
 
-This project demonstrates a complete DevOps setup where a containerized website is deployed on Amazon ECS (Fargate) backed by an Aurora Database Cluster, all provisioned using Terraform (IaC).
+## 🧭 Overview
 
-It follows best practices for environment isolation, scalability, monitoring, and secure architecture across Dev and Staging environments.
+This project demonstrates a **complete DevOps setup** where a **containerized website** is deployed on **Amazon ECS (Fargate)** backed by an **Amazon Aurora Database Cluster**, with all infrastructure provisioned using **Terraform (Infrastructure as Code - IaC)**.
 
-Requirements: 
-1.	For a IAC use Terraform for further creation of deploying AWS resources. 
-2.	Deploy the Website in ECS using Fargate launch type. 
-3.	Deploy and AuroraDb Cluster using by website to ensure the multi-agent availability zones deployment. 
-4.	Ensure that dev and staging Environment separation. 
-5.	Setup Route53 for respective Ecs services for both dev and staging. 
-6.	Integrate Cloud watch for logging and monitoring for both ECS service and Aurora Db. 
-7.	Ensure all resources are securely configured, proper vpc and subnet configuration with secure access to the DB.
+It follows **best practices** for:
+- Environment isolation (Dev & Staging)
+- High availability and scalability
+- Secure networking and IAM policies
+- Centralized logging and monitoring using CloudWatch
 
-🏗️ Architecture Overview
+---
+
+## 🎯 Project Goals / Requirements
+
+1. Use **Terraform** for Infrastructure as Code (IaC) to provision AWS resources.  
+2. Deploy the **website on Amazon ECS** using the **Fargate launch type**.  
+3. Set up an **Aurora Database Cluster** with **multi-AZ availability** for fault tolerance.  
+4. Implement **separate environments** for **Development** and **Staging**.  
+5. Configure **Route53** for domain routing for both environments.  
+6. Integrate **CloudWatch** for logging and monitoring (ECS & Aurora).  
+7. Ensure **secure configurations** — proper **VPC**, **subnet isolation**, **security groups**, and **restricted database access**.
+
+---
+
+## 🏗️ Architecture Overview
+
+```plaintext
                     ┌────────────────────────┐
                     │        Route53         │
                     │ dev.myapp.com          │
@@ -40,7 +52,9 @@ Requirements:
                       │  Alerts & Logs  │
                       └─────────────────┘
 
-🧩 Project Structure
+## 🧩 Project Structure
+
+```plaintext
 project-22/
 ├── modules/
 │   ├── vpc/
