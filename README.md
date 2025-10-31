@@ -206,5 +206,5 @@ terraform destroy -auto-approve
 ## 👨‍💻 **Author**
 
 **Ramagiri Jithendar** — DevOps Engineer
-📧 **[ramagirijithendar@gmail.com](mailto:ramagirijithendar@gmail.com)**
+📧 **[ramagirijithendar1998@gmail.com](mailto:ramagirijithendar1998@gmail.com)**
 💼 **[LinkedIn Profile](#)**
