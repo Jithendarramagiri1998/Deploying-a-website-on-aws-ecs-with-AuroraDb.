@@ -52,7 +52,9 @@ It follows **best practices** for:
                       │  Alerts & Logs  │
                       └─────────────────┘
 
-## 🧩 Project Structure
+# Project-22: ECS with Aurora Deployment
+
+## 🧩 **Project Structure**
 
 ```plaintext
 project-22/
@@ -79,67 +81,87 @@ project-22/
 │   └── ecs_deploy.sh
 │
 └── README.md
+```
 
-⚙️ Prerequisites
+---
 
-AWS Account with IAM permissions
+## ⚙️ **Prerequisites**
 
-Terraform ≥ v1.5
+* **AWS Account** with IAM permissions
+* **Terraform ≥ v1.5**
+* **AWS CLI** configured (`aws configure`)
+* **Docker** installed locally
+* **Domain registered in Route53 (optional)** for DNS setup
 
-AWS CLI configured (aws configure)
+---
 
-Docker installed locally
+## 🪜 **Setup Steps**
 
-Domain registered in Route53 (optional, for DNS setup)
+### 1️⃣ Clone the Repository
 
-🪜 Setup Steps
-1️⃣ Clone the Repository
-git clone https://github.com/<your-username>/project-22-ecs-aurora.git
+```bash
+git clone https://github.com//project-22-ecs-aurora.git
 cd project-22-ecs-aurora
+```
 
-2️⃣ Initialize Terraform (Dev Environment)
+### 2️⃣ Initialize Terraform (Dev Environment)
+
+```bash
 cd environments/dev
 terraform init
 terraform plan
 terraform apply -auto-approve
+```
 
+This provisions **VPC**, **ECS Cluster**, **AuroraDB**, **Route53 records**, **CloudWatch metrics**, and **SNS alerts**.
 
-This provisions VPC, ECS Cluster, AuroraDB, Route53 records, CloudWatch metrics, and SNS alerts.
+### 3️⃣ Initialize Terraform (Staging Environment)
 
-3️⃣ Initialize Terraform (Staging Environment)
+```bash
 cd ../staging
 terraform init
 terraform plan
 terraform apply -auto-approve
+```
 
+Separate resources for **staging** environment with isolated networking, ECS cluster, and AuroraDB.
 
-Separate resources for staging environment with isolated networking, ECS cluster, and AuroraDB.
+---
 
-🐳 Build & Push Docker Image
+## 🐳 **Build & Push Docker Image**
 
-Use the helper script to build and push your website container image to ECR:
+Use the helper script to build and push your website container image to **ECR**:
 
+```bash
 cd scripts
 chmod +x build_and_push_ecr.sh
-./build_and_push_ecr.sh <aws-account-id> <region> <repository-name>
+./build_and_push_ecr.sh
+```
 
-🚢 Deploy ECS Service
+---
+
+## 🚢 **Deploy ECS Service**
 
 After pushing the Docker image, update ECS service with the new image:
 
-./ecs_deploy.sh <cluster-name> <service-name> <image-uri>
+```bash
+./ecs_deploy.sh
+```
 
-🌐 Access the Website
+---
+
+## 🌐 **Access the Website**
 
 After deployment:
 
-Dev: https://dev.myapp.example.com
-
-Staging: https://staging.myapp.example.com
+* **Dev:** [https://dev.myapp.example.com](https://dev.myapp.example.com)
+* **Staging:** [https://staging.myapp.example.com](https://staging.myapp.example.com)
 
 Both environments are isolated with different ECS, Aurora, and VPC setups.
 
-🔒 Security Highlights
+---
+
+## 🔒 **Security Highlights**
 
 ✅ Aurora hosted in private subnets (no public access)
 ✅ ECS tasks communicate via internal SG rules
@@ -147,39 +169,42 @@ Both environments are isolated with different ECS, Aurora, and VPC setups.
 ✅ Encrypted Aurora cluster (KMS key used)
 ✅ HTTPS via ALB + Route53
 
-📈 Monitoring & Alerts
+---
 
-CloudWatch Logs → ECS task/application logs
+## 📈 **Monitoring & Alerts**
 
-CloudWatch Alarms → Aurora CPU, Memory, Disk usage
+* **CloudWatch Logs** → ECS task/application logs
+* **CloudWatch Alarms** → Aurora CPU, Memory, Disk usage
+* **SNS Topic** → Sends alert emails for threshold breaches
 
-SNS Topic → Sends alert emails for threshold breaches
+---
 
-🧱 Environment Separation
+## 🧱 **Environment Separation**
 
-Each environment (dev, staging) has:
+Each environment (**dev**, **staging**) has:
 
-Own VPC, Subnets, Route Tables
-
-Independent ECS Cluster
-
-Separate AuroraDB Cluster
-
-Dedicated CloudWatch Log Groups & Alarms
-
-Distinct Route53 DNS records
+* Own VPC, Subnets, Route Tables
+* Independent ECS Cluster
+* Separate AuroraDB Cluster
+* Dedicated CloudWatch Log Groups & Alarms
+* Distinct Route53 DNS records
 
 This ensures no overlap or cross-environment impact.
 
-🧹 Cleanup
+---
+
+## 🧹 **Cleanup**
 
 To destroy the environment and avoid charges:
 
+```bash
 terraform destroy -auto-approve
+```
 
-👨‍💻 Author
+---
 
-Ramagiri Jithendar — DevOps Engineer
-📧 ramagirijithendar@gmail.com
+## 👨‍💻 **Author**
 
-💼 LinkedIn Profile
+**Ramagiri Jithendar** — DevOps Engineer
+📧 **[ramagirijithendar@gmail.com](mailto:ramagirijithendar@gmail.com)**
+💼 **[LinkedIn Profile](#)**
