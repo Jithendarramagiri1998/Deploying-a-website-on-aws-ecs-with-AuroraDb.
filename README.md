@@ -180,3 +180,6 @@ terraform destroy -auto-approve
 👨‍💻 Author
 
 Ramagiri Jithendar — DevOps Engineer
+📧 ramagirijithendar@gmail.com
+
+💼 LinkedIn Profile
